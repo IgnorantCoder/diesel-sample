@@ -83,13 +83,15 @@ fn main() {
         .execute(&connection)
         .unwrap();
     
-    let _nanoha_posts: Vec<QueryablePost> = posts::table
+    let nanoha_posts: Vec<QueryablePost> = posts::table
         .filter(posts::id_users.eq(nanoha.id))
         .load(&connection).unwrap();
+    println!("{:?}", nanoha_posts);
 
-    let user: QueryableUser = users::table.filter(users::screen_name.eq("fate")).first(&connection).unwrap();
-    let fate_posts: Vec<QueryablePost> = QueryablePost::belonging_to(&user).load(&connection).unwrap();
-    println!("{:?}", fate_posts);
+    let users: Vec<QueryableUser> = users::table.filter(users::screen_name.eq("fate").or(users::screen_name.eq("signum"))).load(&connection).unwrap();
+    println!("{:?}", users);
+    let posts: Vec<QueryablePost> = QueryablePost::belonging_to(&users).load(&connection).unwrap();
+    println!("{:?}", posts);
 
 }
 
