@@ -1,0 +1,11 @@
+[package]
+name = "diesel-sample"
+version = "0.1.0"
+authors = ["Yusuke Mori <fr052123@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+diesel = { version = "1.4.2", features = ["postgres", "r2d2", "chrono", "uuid"] }
+diesel_migrations = "1.4.0"
+uuid = { version = ">=0.2.0, <0.7.0", features = ["v4"] }
+chrono = "0.4.9"
