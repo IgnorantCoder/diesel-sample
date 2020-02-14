@@ -23,6 +23,7 @@ pub struct InsertablePost<'a> {
     pub id: Uuid,
     pub content: &'a str,
     pub id_users: Uuid,
+    pub is_private: bool,
 }
 
 #[derive(Identifiable, Queryable, Debug, Clone)]
@@ -42,6 +43,7 @@ pub struct QueryablePost {
     pub id: Uuid,
     pub content: String,
     pub id_users: Uuid,
+    pub is_private: bool,
 }
 
 fn main() {
@@ -73,12 +75,12 @@ fn main() {
 
     diesel::insert_into(posts::table)
         .values(vec![
-            &InsertablePost{ id: uuid(), content: "diary 9/4", id_users: nanoha.id },
-            &InsertablePost{ id: uuid(), content: "diary 9/5", id_users: nanoha.id },
-            &InsertablePost{ id: uuid(), content: "diary 9/10", id_users: nanoha.id },
-            &InsertablePost{ id: uuid(), content: "photo00", id_users: fate.id },
-            &InsertablePost{ id: uuid(), content: "photo01", id_users: fate.id },
-            &InsertablePost{ id: uuid(), content: "battle memo", id_users: signum.id },
+            &InsertablePost{ id: uuid(), content: "diary 9/4", id_users: nanoha.id, is_private: false },
+            &InsertablePost{ id: uuid(), content: "diary 9/5", id_users: nanoha.id, is_private: true },
+            &InsertablePost{ id: uuid(), content: "diary 9/10", id_users: nanoha.id, is_private: false },
+            &InsertablePost{ id: uuid(), content: "photo00", id_users: fate.id, is_private: false },
+            &InsertablePost{ id: uuid(), content: "photo01", id_users: fate.id, is_private: true },
+            &InsertablePost{ id: uuid(), content: "battle memo", id_users: signum.id, is_private: false },
         ])
         .execute(&connection)
         .unwrap();

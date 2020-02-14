@@ -3,6 +3,7 @@ table! {
         id -> Uuid,
         content -> Text,
         id_users -> Uuid,
+        is_private -> Bool,
     }
 }
 

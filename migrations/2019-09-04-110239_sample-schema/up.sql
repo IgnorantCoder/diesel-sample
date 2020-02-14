@@ -38,6 +38,7 @@ CREATE TABLE public.posts (
 	id uuid NOT NULL,
 	content text NOT NULL,
 	id_users uuid NOT NULL,
+	is_private boolean NOT NULL,
 	CONSTRAINT pk_posts PRIMARY KEY (id)
 
 );
